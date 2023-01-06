@@ -222,10 +222,12 @@ interface ContextX<C extends Context> {
 
     update: UpdateX;
 
-    message: MessageX | undefined;
-    editedMessage: MessageX | undefined;
-    channelPost: MessageX | undefined;
-    editedChannelPost: MessageX | undefined;
+    message: (MessageX & UpdateX.NonChannel) | undefined;
+    editedMessage: (MessageX & UpdateX.Edited & UpdateX.NonChannel) | undefined;
+    channelPost: (MessageX & UpdateX.Channel) | undefined;
+    editedChannelPost:
+        | (MessageX & UpdateX.Edited & UpdateX.Channel)
+        | undefined;
     inlineQuery: InlineQueryX | undefined;
     callbackQuery: CallbackQueryX | undefined;
     shippingQuery: ShippingQueryX | undefined;
